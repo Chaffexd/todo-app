@@ -1,0 +1,57 @@
+label {
+    position: relative;
+}
+
+.input {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 1em 1em 1em 4em;
+    position: relative;
+    margin-bottom: 1em;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border: 1px solid;
+    border-color: hsl(236, 33%, 92%);
+    display: inline-block;
+    border-radius: 50%;
+    z-index: 1;
+    position: absolute;
+    left: 20px;
+    top: 49%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.listHolder {
+    min-width: 100%;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.toDoItem {
+    width: 100%;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    border-bottom: hsl(236, 33%, 92%) 1px solid;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style-type: none;
+    padding: 1em;
+}
+
+.filterContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+}

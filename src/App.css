@@ -1,0 +1,32 @@
+html {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+img {
+    width: 100%;
+}
+
+.toDoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    top: -200px;
+}
+
+.toDoItems {
+    width: 35em;
+}
+
+.title {
+    display: flex;
+    width: 35em;
+    justify-content: space-between;
+    color: white;
+    margin-bottom: 3em;
+}
+
+svg {
+    cursor: pointer;
+}
