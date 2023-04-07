@@ -36,6 +36,7 @@ label {
     min-width: 100%;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 .toDoItem {
@@ -119,5 +120,5 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1em;
+    padding: .5em 1em .5em 1em;
 }
