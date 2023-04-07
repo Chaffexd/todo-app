@@ -30,3 +30,8 @@ img {
 svg {
     cursor: pointer;
 }
+
+.darkTheme {
+    background-color: hsl(235, 21%, 11%);
+    height: 100vh;
+}

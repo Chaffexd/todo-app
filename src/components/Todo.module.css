@@ -10,6 +10,12 @@ label {
     margin-bottom: 1em;
 }
 
+.containerDark {
+    background-color: hsl(235, 24%, 19%);
+    border: none;
+    color: hsl(0, 0%, 98%);
+}
+
 .circle {
     width: 20px;
     height: 20px;
@@ -46,7 +52,42 @@ ul {
 
 li {
     list-style-type: none;
-    padding: 1em;
+    padding: 1em 1em 1em 2em;;
+}
+
+.TodoItemButton {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid;
+    border-color: hsl(236, 33%, 92%);
+    background-color: white;
+    position: relative;
+    left: 20px;
+    cursor: pointer;
+}
+
+.completeBackground {
+    background: linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    border: none;
+}
+
+.completeBackground::after {
+    content: "";
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-image: url(../images/icon-check.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.completedTask {
+    color: hsl(236, 33%, 92%);
+    text-decoration: line-through;
 }
 
 .filterContainer {

@@ -1,28 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import ThemeContext from '../context/theme-context';
 import classes from './Todo.module.css';
 
 const Todo = () => {
+  const { theme } = useContext(ThemeContext);
+  // captures input
   const [input, setInput] = useState("");
+  // stores list items
   const [toDoList, setToDoList] = useState([]);
+  // track the current filter
+  const [filter, setFilter] = useState('all');
+  // track the drag item
+  const [draggedItem, setDraggedItem] = useState(null);
 
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    if(toDoList[index] !== draggedItem) {
+      setToDoList(prevList => {
+        const newList = [...prevList];
+        newList.splice(index, 0, newList.splice(newList.indexOf(draggedItem), 1)[0]);
+        return newList;
+      })
+    }
+  };
+
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    e.target.classList.add(classes.dragOver)
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.target.classList.remove(classes.dragOver);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.target.classList.remove(classes.dragOver);
+  };
+
+  // captures input for the list
   const handleInput = (e) => {
     setInput(e.target.value);
   };
 
+  // also reacts to enter key
+  const handleEnter = (e) => {
+    if(e.key === "Enter") {
+      addItem();
+    }
+  };
+
+  // if input is blank, it will alert you
   const addItem = () => {
     if(!input) {
       alert("Enter a task!");
       return;
     }
 
+    // this is to try what is added to the list
     const item = {
-      id: Math.floor(Math.random() * 50),
-      input: input
+      id: Math.floor(Math.random() * 5000000),
+      input: input,
+      complete: false
     };
 
+    // will update the array snapshot accordingly
     setToDoList(prevList => [...prevList, item]);
+    // resets the input
     setInput("");
     console.log(toDoList);
+  };
+
+  // this is for the tick click
+  // it looks at the previous list and makes a new array on it
+  // it checks if task.id is true and makes a new array of task
+  // to mark it as complete
+  const handleCompletion = (id) => {
+    setToDoList(prevList =>
+      prevList.map(task =>
+        task.id === id ? { ...task, complete: !task.complete } : task
+      )
+    );
+  };
+
+  // this will filter the list based on whether a task is complete
+  const handleClearCompleted = () => {
+    setToDoList(prevList =>
+      prevList.filter(task => !task.complete)
+    );
+  };
+
+  // this will set the filter state to the selected filter based on click
+  const filterHandler = (type) => {
+    setFilter(type)
   };
 
   return (
@@ -31,7 +102,7 @@ const Todo = () => {
         <label htmlFor="to-do-input">
           <span className={classes.circle} onClick={addItem}></span>
           <input
-            className={classes.input}
+            className={`${classes.input} ${theme === "light" ? "" : classes.containerDark}`}
             type="text"
             id="to-do-input"
             name="text"
@@ -39,30 +110,48 @@ const Todo = () => {
             placeholder="Create a new to do..."
             value={input}
             onChange={handleInput}
+            onKeyDown={handleEnter}
           />
         </label>
       </div>
       <div className={classes.listHolder}>
         <div className={classes.tasksContainer}>
           <ul>
-            {toDoList.map((entry) => {
-              return (
-                <div key={entry.id} className={classes.toDoItem}>
-                  <li>{entry.input}</li>
-                </div>
-              )
-            })}
+            {toDoList.filter((entry) => {
+              if(filter === "completed") {
+                return entry.complete;
+              } else if(filter === "active") {
+                return !entry.complete;
+              } else {
+                return true;
+              }
+            }).map((entry, index) => (
+              <div 
+                key={index} 
+                className={`${classes.toDoItem} ${theme === "light" ? "" : classes.containerDark}`}
+                draggable={true}
+                onDragStart={() => setDraggedItem(entry)}
+                onDragOver={(e) => handleDragOver(e, index)}
+                onDragEnter={(e) => handleDragEnter(e)}
+                onDragLeave={(e) => handleDragLeave(e)}
+                onDrop={(e) => handleDrop(e)}
+              >
+                <button className={entry.complete ? `${classes.completeBackground} ${classes.TodoItemButton}` : `${classes.TodoItemButton}`} onClick={() => handleCompletion(entry.id)} />
+                <li className={entry.complete ? classes.completedTask : ""}>{entry.input}</li>
+              </div>
+            ) 
+            )}
           </ul>
         </div>
-        <div className={classes.filterContainer}>
-          <div>Items Left</div>
+        <div className={`${classes.filterContainer} ${theme === "light" ? "" : classes.containerDark}`}>
+          <div>{toDoList.length} items left</div>
           <div>
-            <button>All</button>
-            <button>Active</button>
-            <button>Complete</button>
+            <button onClick={() => filterHandler("all")}>All</button>
+            <button onClick={() => filterHandler("active")}>Active</button>
+            <button onClick={() => filterHandler("completed")}>Completed</button>
           </div>
           <div>
-            <button>Clear Completed</button>
+            <button onClick={handleClearCompleted}>Clear Completed</button>
           </div>
         </div>
       </div>
