@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import ThemeContext from '../context/theme-context';
 import classes from './Todo.module.css';
 
@@ -12,8 +12,10 @@ const Todo = () => {
   const [filter, setFilter] = useState('all');
   // track the drag item
   const [draggedItem, setDraggedItem] = useState(null);
+  // add the css class based on selection
+  const [selectedFilter, setSelectedFilter] = useState("all");
 
-  const handleDragOver = (e, index) => {
+  const handleDragOver = useCallback((e, index) => {
     e.preventDefault();
     if(toDoList[index] !== draggedItem) {
       setToDoList(prevList => {
@@ -22,22 +24,22 @@ const Todo = () => {
         return newList;
       })
     }
-  };
+  }, [draggedItem, toDoList]);
 
-  const handleDragEnter = (e) => {
+  const handleDragEnter = useCallback((e) => {
     e.preventDefault();
     e.target.classList.add(classes.dragOver)
-  };
+  }, []);
 
-  const handleDragLeave = (e) => {
+  const handleDragLeave = useCallback((e) => {
     e.preventDefault();
     e.target.classList.remove(classes.dragOver);
-  };
+  }, []);
 
-  const handleDrop = (e) => {
+  const handleDrop = useCallback((e) => {
     e.preventDefault();
     e.target.classList.remove(classes.dragOver);
-  };
+  }, []);
 
   // captures input for the list
   const handleInput = (e) => {
@@ -93,7 +95,8 @@ const Todo = () => {
 
   // this will set the filter state to the selected filter based on click
   const filterHandler = (type) => {
-    setFilter(type)
+    setSelectedFilter(type);
+    setFilter(type);
   };
 
   return (
@@ -144,14 +147,14 @@ const Todo = () => {
           </ul>
         </div>
         <div className={`${classes.filterContainer} ${theme === "light" ? "" : classes.containerDark}`}>
-          <div>{toDoList.length} items left</div>
+          <div className={classes.listLength}>{toDoList.length} items left</div>
           <div>
-            <button onClick={() => filterHandler("all")}>All</button>
-            <button onClick={() => filterHandler("active")}>Active</button>
-            <button onClick={() => filterHandler("completed")}>Completed</button>
+            <button className={`${classes.filterButton} ${selectedFilter === "all" ? classes.selected : ""}`} onClick={() => filterHandler("all")}>All</button>
+            <button className={`${classes.filterButton} ${selectedFilter === "active" ? classes.selected : ""}`}  onClick={() => filterHandler("active")}>Active</button>
+            <button className={`${classes.filterButton} ${selectedFilter === "completed" ? classes.selected : ""}`}  onClick={() => filterHandler("completed")}>Completed</button>
           </div>
           <div>
-            <button onClick={handleClearCompleted}>Clear Completed</button>
+            <button className={classes.clearButton} onClick={handleClearCompleted}>Clear Completed</button>
           </div>
         </div>
       </div>

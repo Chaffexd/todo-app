@@ -14,6 +14,7 @@ label {
     background-color: hsl(235, 24%, 19%);
     border: none;
     color: hsl(0, 0%, 98%);
+    border-bottom: 1px solid hsl(234, 11%, 52%) !important;
 }
 
 .circle {
@@ -52,7 +53,8 @@ ul {
 
 li {
     list-style-type: none;
-    padding: 1em 1em 1em 2em;;
+    padding: 1em 1em 1em 2em;
+    color: hsl(234, 11%, 52%);
 }
 
 .TodoItemButton {
@@ -88,6 +90,29 @@ li {
 .completedTask {
     color: hsl(236, 33%, 92%);
     text-decoration: line-through;
+}
+
+.filterButton {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 700;
+    color: hsl(234, 11%, 52%);
+}
+
+.selected {
+    color: blue;
+}
+
+.clearButton {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: hsl(234, 11%, 52%);
+}
+
+.listLength {
+    color: hsl(234, 11%, 52%);
 }
 
 .filterContainer {
