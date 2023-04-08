@@ -139,7 +139,7 @@ const Todo = () => {
                 onDragLeave={(e) => handleDragLeave(e)}
                 onDrop={(e) => handleDrop(e)}
               >
-                <button className={entry.complete ? `${classes.completeBackground} ${classes.TodoItemButton}` : `${classes.TodoItemButton}`} onClick={() => handleCompletion(entry.id)} />
+                <button className={`${classes.TodoItemButton} ${entry.complete ? classes.completeBackground : ""} ${theme === "dark" ? classes.darkButton : ""}`} onClick={() => handleCompletion(entry.id)} />
                 <li className={entry.complete ? classes.completedTask : ""}>{entry.input}</li>
               </div>
             ) 

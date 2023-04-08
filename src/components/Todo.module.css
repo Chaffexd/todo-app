@@ -116,6 +116,10 @@ li {
     color: hsl(234, 11%, 52%);
 }
 
+.darkButton {
+    background-color: hsl(235, 24%, 19%);
+}
+
 .filterContainer {
     display: flex;
     justify-content: space-between;
