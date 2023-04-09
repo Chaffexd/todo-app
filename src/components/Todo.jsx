@@ -15,6 +15,10 @@ const Todo = () => {
   // add the css class based on selection
   const [selectedFilter, setSelectedFilter] = useState("all");
 
+  // we prevent default to stop the default behaviour
+  // if the index of todolist is not equal to the dragged item, we set the prev list to be updated to the new list
+  // then we add new list at position 0
+  // we use useCallback to cache the function as it isnt necessary every render
   const handleDragOver = useCallback((e, index) => {
     e.preventDefault();
     if(toDoList[index] !== draggedItem) {
@@ -26,16 +30,22 @@ const Todo = () => {
     }
   }, [draggedItem, toDoList]);
 
+  // we add the dragOver class
+  // we use useCallback to cache the function as it isnt necessary every render
   const handleDragEnter = useCallback((e) => {
     e.preventDefault();
     e.target.classList.add(classes.dragOver)
   }, []);
 
+  // we remove the dragOver class
+  // we use useCallback to cache the function as it isnt necessary every render
   const handleDragLeave = useCallback((e) => {
     e.preventDefault();
     e.target.classList.remove(classes.dragOver);
   }, []);
 
+  // we remove the dragOver class
+  // we use useCallback to cache the function as it isnt necessary every render
   const handleDrop = useCallback((e) => {
     e.preventDefault();
     e.target.classList.remove(classes.dragOver);
@@ -98,6 +108,7 @@ const Todo = () => {
     setSelectedFilter(type);
     setFilter(type);
   };
+
 
   return (
     <>
