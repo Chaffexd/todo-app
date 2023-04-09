@@ -169,6 +169,7 @@ const Todo = () => {
           </div>
         </div>
       </div>
+      <p className={classes.dragNDrop}>Drag and drop to re-order the list</p>
     </>
   );
 };

@@ -120,6 +120,12 @@ li {
     background-color: hsl(235, 24%, 19%);
 }
 
+.dragNDrop {
+    text-align: center;
+    margin-top: 2em;
+    color: hsl(234, 11%, 52%);
+}
+
 .filterContainer {
     display: flex;
     justify-content: space-between;
