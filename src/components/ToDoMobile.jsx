@@ -2,7 +2,7 @@ import React, { useState, useContext, useCallback, useEffect } from 'react';
 import ThemeContext from '../context/theme-context';
 import classes from './Todo.module.css';
 
-const Todo = (props) => {
+const ToDoMobile = (props) => {
   const { theme } = useContext(ThemeContext);
   // captures input
   const [input, setInput] = useState("");
@@ -163,22 +163,20 @@ const Todo = (props) => {
             ) 
             )}
             </ul>
+            <div className={`${classes.listLength} ${theme === "light" ? "" : classes.containerDark}`}>
+                <p>{incompleteCount} items left</p>
+                <button className={classes.clearButton} onClick={handleClearCompleted}>Clear Completed</button>
+            </div>
+        </div>
         </div>
         <div className={`${classes.filterContainer} ${theme === "light" ? "" : classes.containerDark}`}>
-          <div className={classes.listLength}>{incompleteCount} items left</div>
-          <div>
             <button className={`${classes.filterButton} ${selectedFilter === "all" ? classes.selected : ""}`} onClick={() => filterHandler("all")}>All</button>
             <button className={`${classes.filterButton} ${selectedFilter === "active" ? classes.selected : ""}`}  onClick={() => filterHandler("active")}>Active</button>
             <button className={`${classes.filterButton} ${selectedFilter === "completed" ? classes.selected : ""}`}  onClick={() => filterHandler("completed")}>Completed</button>
-          </div>
-          <div>
-            <button className={classes.clearButton} onClick={handleClearCompleted}>Clear Completed</button>
-          </div>
         </div>
-      </div>
-      <p className={classes.dragNDrop}>Drag and drop to re-order the list</p>
+        <p className={classes.dragNDrop}>Drag and drop to re-order the list</p>
     </>
   );
 };
 
-export default Todo;
+export default ToDoMobile;

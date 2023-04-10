@@ -11,7 +11,7 @@ label {
 }
 
 .containerDark {
-    background-color: hsl(235, 24%, 19%);
+    background-color: hsl(235, 24%, 19%) !important;
     border: none;
     color: hsl(0, 0%, 98%);
     border-bottom: 1px solid hsl(234, 11%, 52%) !important;
@@ -131,4 +131,34 @@ li {
     justify-content: space-between;
     align-items: center;
     padding: .5em 1em .5em 1em;
+}
+
+@media screen and (max-width: 1000px) {
+    .filterContainer {
+        justify-content: center;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .mobileDivFilter {
+        display: flex;
+        justify-content: space-between;
+        padding: 1em;
+    }
+    .mobileFooter {
+        text-align: center;
+        padding: 1em;
+    }
+    .input {
+        margin-bottom: 0;
+    }
+    .listLength {
+        display: flex;
+        justify-content: space-between;
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+    .listHolder {
+        margin-top: 1em;
+        border-radius: 2px;
+    }
 }

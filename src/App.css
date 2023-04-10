@@ -35,3 +35,27 @@ svg {
     background-color: hsl(235, 21%, 11%);
     height: 100vh;
 }
+
+@media screen and (max-width: 900px) {
+    .App {
+        width: 100vw;
+        height: 100vh;
+    }
+    .toDoContainer {
+        top: -170px;
+        width: 100%;
+    }
+    .toDoItems {
+        width: 90%;
+    }
+    .title {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .toDoContainer {
+        top: -150px;
+        width: 100%;
+    }
+}
