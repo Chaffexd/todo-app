@@ -31,9 +31,9 @@ function App(props) {
     <ThemeContext.Provider value={{ theme, setTheme, toggle: toggleThemeHandler }}>
       <div className={theme === "light" ? "App" : "darkTheme"}>
         { isDesktop ?
-          <img src={theme === "light" ? lightBg : darkBg } />
+          <img src={theme === "light" ? lightBg : darkBg } alt="theme bg" />
           : 
-          <img src={theme === "light" ? mobileLightBg : mobileDarkBg } className="mobileBg" />
+          <img src={theme === "light" ? mobileLightBg : mobileDarkBg } alt="theme bg" className="mobileBg" />
         }
         <div className="toDoContainer">
           <div className="title">
