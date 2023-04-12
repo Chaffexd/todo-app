@@ -31,7 +31,10 @@ const Todo = (props) => {
     if(toDoList[index] !== draggedItem) {
       setToDoList(prevList => {
         const newList = [...prevList];
-        newList.splice(index, 0, newList.splice(newList.indexOf(draggedItem), 1)[0]);
+        // newList.splice(index, 0, newList.splice(newList.indexOf(draggedItem), 1)[0]);
+        // this is a code refactor of above to read easier
+        newList.splice(newList.indexOf(draggedItem), 1); 
+        newList.splice(index, 0, draggedItem);
         return newList;
       })
     }
@@ -79,7 +82,7 @@ const Todo = (props) => {
 
     // this is to try what is added to the list
     const item = {
-      id: Math.floor(Math.random() * 5000000),
+      id: Math.random().toString(),
       input: input,
       complete: false
     };
